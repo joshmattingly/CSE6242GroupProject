@@ -20,3 +20,5 @@ combined_dataset/
 ELPC_sample_zip/
 
 dataset_clean\.csv
+
+\.ipynb_checkpoints/XGBoost Test-checkpoint\.ipynb
