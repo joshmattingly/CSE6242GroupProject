@@ -1,0 +1,4 @@
+*.pickle
+data/*
+*.csv
+.DS_Store
