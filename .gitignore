@@ -11,3 +11,5 @@ Chicago AoT Monthly Aggregates\.csv
 
 measurements\.tsv
 SiteBackend/data.sqlite
+
+SiteBackend/static/noon\.csv

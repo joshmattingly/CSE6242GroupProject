@@ -56,13 +56,12 @@ def make_shell_context():
 
 @app.route('/')
 def index():
-    return render_template('index.html',
-                           current_time=datetime.utcnow())
+    return render_template('index.html')
 
 
-@app.route('/user/<name>')
-def user(name):
-    return render_template('user.html', name=name)
+@app.route('/heatmap')
+def heatmap():
+    return render_template('heatmap.html')
 
 
 @app.errorhandler(404)

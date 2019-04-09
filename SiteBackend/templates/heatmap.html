@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container search">
+    <div class="row">
+        <div class="col-4">
+            Enter a Location:<input type="text" size="45%">
+            [SCORE COMPONENT GOES HERE]
+        </div>
+        <div class="col-8 map">
+            <script>
+                var margin = {top: 20, right: 10, bottom: 20, left: 10};
+                var width = 960 - margin.left - margin.right,
+                    height = 800 - margin.top - margin.bottom;
+
+                var svg = d3.select(".map").append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+
+                let projection = d3.geoAlbers()
+                    .center([0, 41.83])
+                    .rotate([87.65, 0])
+                    .parallels([40, 45])
+                    .scale(110000)
+                    .translate([width / 2, height / 2 + 10]);
+
+                let path = d3.geoPath(projection);
+
+                let promises = [
+                    d3.json("{{ url_for('static', filename='chicago.geojson') }}")
+                    //d3.csv("{{ url_for('static', filename='noon.csv') }}"),
+                    //d3.csv("{{ url_for('static', filename='dataset_clean.csv') }}"),
+                ]
+
+                Promise.all(promises).then(function (datasets) {
+
+                    let geo = datasets[0];
+                    //let measures = datasets[0];
+                    //let readings = datasets[1];
+
+                    /*
+                    let colorRange = d3.scaleSequential(d3.interpolatePlasma)
+                        .domain([d3.min(measures, d => d['Nitrogen dioxide']),
+                            d3.max(measures, d => d['Nitrogen dioxide'])])
+
+
+                    measures.forEach(function (d) {
+                        d['Nitrogen dioxide'] = + d['Nitrogen dioxide'];
+                        d.Ozone = +d.Ozone;
+                        d['PM 2.5'] = +d['PM 2.5'];
+                        d['PM 10'] = +d['PM 10'];
+                        d['Sufur dioxide'] = +d['Sufur dioxide'];
+                        d.lat = +d.lat;
+                        d.long = +d.long;
+                    });
+
+                    console.log(measures);
+
+                    svg.selectAll("circle")
+                        .data(measures)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", d => projection([d.long, d.lat])[0])
+                        .attr("cy", d => projection([d.long, d.lat])[1])
+                        .attr("fill", d => colorRange(d['Nitrogen dioxide']))
+                        .attr("stroke-width", 1)
+                        .attr("stroke", d => colorRange(d['Nitrogen dioxide']))
+                        .attr("r", 3)
+                        .attr("opacity", 0.5);
+                    */
+                    svg.selectAll("path")
+                        .data(geo.features)
+                        .enter()
+                        .append("path")
+                        .attr("d", path)
+                        .attr("stroke", "black")
+                        .attr("fill", "none");
+                    /*
+                    svg.selectAll("circle")
+                        .data(readings.filter(d => d['parameter'] == 'pm2_5'))
+                        .enter()
+                        .append("circle")
+                        .attr("cx", d => projection([d.long, d.lat])[0])
+                        .attr("cy", d => projection([d.long, d.lat])[1])
+                        .attr("fill", d => colorRange(d['avg']))
+                        .attr("stroke-width", 1)
+                        .attr("stroke", "black")
+                        .attr("r", 2)
+                        .attr("opacity", 1);
+
+                     */
+                })
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}
