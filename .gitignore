@@ -13,3 +13,5 @@ measurements\.tsv
 SiteBackend/data.sqlite
 
 SiteBackend/static/noon\.csv
+
+SiteBackend/config\.py
