@@ -17,6 +17,10 @@ from sklearn.svm import SVC
 from sklearn.model_selection import GridSearchCV, train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.neural_network import MLPRegressor
+from sklearn.gaussian_process import GaussianProcessRegressor
+
+from utils import max_lon, min_lon, max_lat, min_lat, build_X_grid, resolution_lon, resolution_lat
 
 # download Josh's cleaned data set: https://s3.us-east-2.amazonaws.com/chipy6242/dataset_clean.csv
 # df = pd.read_csv('https://s3.us-east-2.amazonaws.com/chipy6242/dataset_clean.csv', parse_dates=['datetime'])
@@ -29,13 +33,22 @@ parameters = [
   ('Ozone', (df.subsystem=='chemsense') & (df.sensor == 'o3') & (df.parameter == 'concentration')), # o3
   ('Nitrogen dioxide', (df.subsystem=='chemsense') & (df.sensor == 'no2') & (df.parameter == 'concentration')), #no2
   ('Sufur dioxide', (df.subsystem=='chemsense') & (df.sensor == 'so2') & (df.parameter == 'concentration')), # so2
+  ('Carbon monoxide', (df.subsystem=='chemsense') & (df.sensor == 'co') & (df.parameter == 'concentration')), # co
+  ('Hydrogen Sulfide', (df.subsystem=='chemsense') & (df.sensor == 'h2s') & (df.parameter == 'concentration')), # h2s
 ]
 
 # Models to test
 models = [ # list of tuples of (ModelClass, grid-searchable hyperparameters dictionary)
     (KNeighborsRegressor, { 'n_neighbors': [3, 5, 10], 'weights': ['distance'] }),
     (RandomForestRegressor, { 'n_estimators': [100, 1000], 'max_depth': [None] }),
+    # (GaussianProcessRegressor, {}),
+    # (LinearRegression, {}),
+    (MLPRegressor, {}),
 ]
+
+print()
+print('[1] FIND THE BEST MODEL FOR EACH PARAMETER')
+print()
 
 for (name, df_filter) in parameters:
     print('### {} ###'.format(name))
@@ -43,8 +56,8 @@ for (name, df_filter) in parameters:
     X = df[df_filter]
     X = X[['datetime','lat','long']]
     X['hod'] = X['datetime'].apply(lambda x: x.hour)
-    X['dow'] = X['datetime'].apply(lambda x: x.dayofweek)
-    X = X[['hod','lat','long']]
+    X['weekend'] = X['datetime'].apply(lambda x: 0 if x.dayofweek < 5 else 1)
+    X = X[['weekend','hod','lat','long']]
 
     # Create the predicted variable
     y = df[df_filter]
@@ -59,7 +72,7 @@ for (name, df_filter) in parameters:
     for (model, params) in models:
         # Grid Search for the best hyper parameters
         print('  === {} ==='.format(model.__name__))
-        gridSearch = GridSearchCV(model(), param_grid=params, refit=True)
+        gridSearch = GridSearchCV(model(), param_grid=params, refit=True, n_jobs=-1)
         gridSearch.fit(X_train, y_train)
         print('    Best Params:', gridSearch.best_params_)
 
@@ -78,52 +91,34 @@ for (name, df_filter) in parameters:
 
     print('  Best RMSE: {}'.format(bestRMSE))
     print('  Best Model: {}'.format(type(bestGridSearch.best_estimator_).__name__))
-    print('  Best Params: ',bestGridSearch.best_params_)
+    print('  Best Params: ', bestGridSearch.best_params_)
     print()
 
     # Setup the BEST model for this indicator
-    model = bestGridSearch.best_estimator_
+    model = type(bestGridSearch.best_estimator_)(**bestGridSearch.best_params_)
     model.fit(X, y)
-    pickle.dump(model, open('{}.pickle'.format(name), 'wb'))
+    pickle.dump(model, open('models/{}.pickle'.format(name), 'wb'))
 
-    # Build the Grid to interpolate over
-    max_lat = X['lat'].min()
-    min_lat = X['lat'].max()
-    max_lon = X['long'].min()
-    min_lon = X['long'].max()
-    print('Latitude Range: {} to {}'.format(min_lat, max_lat))
-    print('Longitude Range: {} to {}'.format(min_lon, max_lon))
-
-    hod = 12 # NOON
-    resolution_lon = 100
-    resolution_lat = 100
-
-    resolution = resolution_lon * resolution_lat
-    grid_lon = np.linspace(min_lon, max_lon, resolution_lon)
-    grid_lat = np.linspace(min_lat, max_lat, resolution_lat)
-
-    # Build an array with 2 columns that consists of every combination of the lat/lon's in the interpolation grid
-    grid_lon_lat = np.reshape(np.asarray(np.meshgrid(grid_lon, grid_lat)), (2, resolution))
-    data = np.zeros((resolution, 3))
-    data[:, 0] = hod
-    data[:, 2] = grid_lon_lat[0,:]
-    data[:, 1] = grid_lon_lat[1,:]
-    X_grid = pd.DataFrame(data=data, columns=['hod', 'lat', 'long'])
 
     # Interpolate over the grid
+    X_grid = build_X_grid()
     z = model.predict(X_grid)
-    avgs = np.reshape(z, (resolution_lon, resolution_lat))
+    output = build_X_grid()
+    output['z'] = z
+    output.to_csv('outputs/{}.csv'.format(name), index=False)
+
+    # Reshape data for plot'n
+    data = output[(output.weekend == 0) & (output.hod == 12)]
+    avgs = np.reshape(data['z'].values, (resolution_lon, resolution_lat))
 
     # Plot in 3-d
     fig = plt.figure(figsize=(10,5))
-    fig.suptitle('{} at Noon'.format(name))
+    fig.suptitle('{} at Noon on a Weekday'.format(name))
     ax = fig.gca(projection='3d')
-    lons = np.reshape(grid_lon_lat[0], (100, 100))
-    lats = np.reshape(grid_lon_lat[1], (100, 100))
-    surf = ax.plot_surface(lons, lats, avgs, 
-                           cmap=cm.coolwarm, linewidth=0, antialiased=False)
+    lons = np.reshape(data['long'].values, (100, 100))
+    lats = np.reshape(data['lat'].values, (100, 100))
+    surf = ax.plot_surface(lons, lats, avgs, cmap=cm.coolwarm, linewidth=0, antialiased=False)
     fig.colorbar(surf, shrink=0.5, aspect=5)
-
-    plt.savefig('{}.png'.format(name), bbox_inches='tight')
+    plt.savefig('charts/{}.png'.format(name), bbox_inches='tight')
 
 print('DONE.')
