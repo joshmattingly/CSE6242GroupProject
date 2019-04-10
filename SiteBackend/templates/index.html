@@ -1,3 +1,120 @@
 {% extends "base.html" %}
-{% block map %}
+{% block content %}
+
+<div class="container search">
+    <div class="row">
+        <div class="col-auto">
+            <form method="post">
+                {{ form.hidden_tag() }}
+                Enter a Location:
+                <input type="text" size="45%" id="fetchAddress">
+                <button class="btn btn-default">
+                    <img src="{{ url_for('static', filename='./images/search_icon.png') }}" width="35"/>
+                </button>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            <div class="row">
+                <div class="card">
+                    <img class="card-img-top" src="{{ url_for('static', filename='./images/chi_flag.png')}}"
+                         alt="Location Info">
+                    <div class="card-body">
+                        <p>Location:<br> {{ address }}</p>
+                        <p>Senators: <br>Dick Durbin<br>Tammy Duckworth</p>
+                        <p>House Rep: <br>Mike Quigley</p>
+                        <p>State Rep: <br> Some Person</p>
+                        <p>State Senator: <br> Some Other Person</p>
+                        <p>City Ward:<br> <a
+                                href="https://www.chicago.gov/city/en/depts/mayor/iframe/lookup_ward_and_alderman.html"
+                                target="_blank">Find your Alderman</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <h1 class="display-3 card-img-top">{{ location_score }}</h1>
+                    <div class="card-body">
+                        <h5>Location Score</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 map">
+            <div id="map"></div>
+            <script>
+                /*
+                var input = document.getElementById('fetchAddress');
+                var fetchAddress = new google.maps.places.Autocomplete(input, {types: ['(address)']});
+
+                google.maps.event.addListener(fetchAddress, 'place_changed', function(){
+                     var place = fetchAddress.getPlace();
+                })
+                */
+
+                let map;
+
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: {lat: 41.8336479, lng: -87.8720462},
+                        zoom: 15
+                    });
+                }
+            </script>
+            <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"
+                    async defer></script>
+        </div>
+        <div class="col-4">
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne" style="background-color: #FFFFFF;">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link" data-toggle="collapse" data-target="#scoreSummary"
+                                    aria-expanded="true" aria-controls="scoreSummary">
+                                Score Summary
+                            </button>
+                        </h5>
+                    </div>
+
+                    <div id="scoreSummary" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body scrollable">
+                            {{ summary }}
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingTwo" style="background-color: #FFFFFF;">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#worldIndex"
+                                    aria-expanded="false" aria-controls="worldIndex">
+                                World Index
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="worldIndex" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                        <div class="card-body scrollable">
+                            {{ summary }}
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header" id="headingThree" style="background-color: #FFFFFF;">
+                        <h5 class="mb-0">
+                            <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#chicagoIndex"
+                                    aria-expanded="false" aria-controls="chicagoIndex">
+                                Chicago Index
+                            </button>
+                        </h5>
+                    </div>
+                    <div id="chicagoIndex" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                        <div class="card-body scrollable">
+                            {{ summary }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
