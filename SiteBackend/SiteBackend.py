@@ -65,7 +65,7 @@ class Data(db.Model):
 
 
 class AddressForm(FlaskForm):
-    address = StringField(validators=[DataRequired()])
+    address = StringField('Enter an Address:', validators=[DataRequired()])
     submit = SubmitField()
 
 
@@ -76,19 +76,28 @@ def make_shell_context():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    address = "1060 W Addison St, Chicago, IL 60613"
     form = AddressForm()
-    entry = form.address.data
     geo_record = []
-    address = '2251 W North Ave Chicago, IL 60647'
-    reps = []
+
+    senator1 = []
+    senator2 = []
+    house_rep = []
+    state_senator = []
+    state_rep = []
+    commissioner = []
+    alderman = []
+    senator1, senator2, house_rep, state_senator, state_rep, commissioner, alderman = utilities.get_reps(address)
     if form.validate_on_submit():
-        # entry = form.address.data
-        # geo_record = utilities.geocode(entry)
-        # reps = utilities.get_reps()
+        address = form.address.data
         form.address.data = ''
+        # geo_record = utilities.geocode(address)
+        senator1, senator2, house_rep, state_senator, state_rep, commissioner, alderman = utilities.get_reps(address)
 
     return render_template('index.html', api_key=config.api_key, location_score='55%', summary=test_summary,
-                           form=form, entry=entry, address=address, reps=reps)
+                           form=form, address=address, senator1=senator1, senator2=senator2,
+                           house_rep=house_rep, state_senator=state_senator, state_rep=state_rep,
+                           commissioner=commissioner, alderman=alderman)
 
 
 @app.route('/about')

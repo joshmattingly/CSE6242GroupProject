@@ -15,3 +15,7 @@ SiteBackend/data.sqlite
 SiteBackend/static/noon\.csv
 
 SiteBackend/config\.py
+
+SiteBackend/config\.pyc
+
+SiteBackend/__pycache__/config\.cpython-37\.pyc

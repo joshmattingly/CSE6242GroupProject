@@ -1,5 +1,5 @@
 .search {
-    padding-top: 25px;
+    padding-top: 5px;
 }
 
 #map {
@@ -14,3 +14,12 @@
 .card{
     width:100%;
 }
+
+.score{
+    text-align: center;
+}
+
+ input {
+   width: 50%;
+ }
+

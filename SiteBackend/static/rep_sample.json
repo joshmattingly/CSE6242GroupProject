@@ -1,438 +1,899 @@
 {
-    "kind": "civicinfo#representativeInfoResponse",
-    "normalizedInput": {
-        "line1": "2251 West North Avenue",
-        "city": "Chicago",
-        "state": "IL",
-        "zip": "60647"
+ "kind": "civicinfo#representativeInfoResponse",
+ "normalizedInput": {
+  "line1": "2251 West North Avenue",
+  "city": "Chicago",
+  "state": "IL",
+  "zip": "60647"
+ },
+ "divisions": {
+  "ocd-division/country:us": {
+   "name": "United States",
+   "officeIndices": [
+    0,
+    1
+   ]
+  },
+  "ocd-division/country:us/state:il": {
+   "name": "Illinois",
+   "officeIndices": [
+    2,
+    4,
+    5,
+    11,
+    12,
+    13,
+    14
+   ]
+  },
+  "ocd-division/country:us/state:il/cd:5": {
+   "name": "Illinois's 5th congressional district",
+   "officeIndices": [
+    3
+   ]
+  },
+  "ocd-division/country:us/state:il/county:cook": {
+   "name": "Cook County",
+   "officeIndices": [
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+   ]
+  },
+  "ocd-division/country:us/state:il/county:cook/council_district:12": {
+   "name": "Cook County Commission District 12",
+   "officeIndices": [
+    15
+   ]
+  },
+  "ocd-division/country:us/state:il/place:chicago": {
+   "name": "Chicago city",
+   "officeIndices": [
+    8,
+    9,
+    10
+   ]
+  },
+  "ocd-division/country:us/state:il/place:chicago/ward:1": {
+   "name": "Chicago IL - ward 1",
+   "officeIndices": [
+    24
+   ]
+  },
+  "ocd-division/country:us/state:il/sldl:4": {
+   "name": "Illinois State House district 4",
+   "officeIndices": [
+    7
+   ]
+  },
+  "ocd-division/country:us/state:il/sldu:2": {
+   "name": "Illinois State Senate district 2",
+   "officeIndices": [
+    6
+   ]
+  }
+ },
+ "offices": [
+  {
+   "name": "President of the United States",
+   "divisionId": "ocd-division/country:us",
+   "levels": [
+    "country"
+   ],
+   "roles": [
+    "headOfState",
+    "headOfGovernment"
+   ],
+   "officialIndices": [
+    0
+   ]
+  },
+  {
+   "name": "Vice-President of the United States",
+   "divisionId": "ocd-division/country:us",
+   "levels": [
+    "country"
+   ],
+   "roles": [
+    "deputyHeadOfGovernment"
+   ],
+   "officialIndices": [
+    1
+   ]
+  },
+  {
+   "name": "United States Senate",
+   "divisionId": "ocd-division/country:us/state:il",
+   "levels": [
+    "country"
+   ],
+   "roles": [
+    "legislatorUpperBody"
+   ],
+   "officialIndices": [
+    2,
+    3
+   ]
+  },
+  {
+   "name": "United States House of Representatives IL-05",
+   "divisionId": "ocd-division/country:us/state:il/cd:5",
+   "levels": [
+    "country"
+   ],
+   "roles": [
+    "legislatorLowerBody"
+   ],
+   "officialIndices": [
+    4
+   ]
+  },
+  {
+   "name": "Governor",
+   "divisionId": "ocd-division/country:us/state:il",
+   "levels": [
+    "administrativeArea1"
+   ],
+   "roles": [
+    "headOfGovernment"
+   ],
+   "officialIndices": [
+    5
+   ]
+  },
+  {
+   "name": "Lieutenant Governor",
+   "divisionId": "ocd-division/country:us/state:il",
+   "levels": [
+    "administrativeArea1"
+   ],
+   "roles": [
+    "deputyHeadOfGovernment"
+   ],
+   "officialIndices": [
+    6
+   ]
+  },
+  {
+   "name": "IL State Senate District 2",
+   "divisionId": "ocd-division/country:us/state:il/sldu:2",
+   "levels": [
+    "administrativeArea1"
+   ],
+   "roles": [
+    "legislatorUpperBody"
+   ],
+   "officialIndices": [
+    7
+   ]
+  },
+  {
+   "name": "IL State House District 4",
+   "divisionId": "ocd-division/country:us/state:il/sldl:4",
+   "levels": [
+    "administrativeArea1"
+   ],
+   "roles": [
+    "legislatorLowerBody"
+   ],
+   "officialIndices": [
+    8
+   ]
+  },
+  {
+   "name": "City Clerk",
+   "divisionId": "ocd-division/country:us/state:il/place:chicago",
+   "officialIndices": [
+    9
+   ]
+  },
+  {
+   "name": "Mayor",
+   "divisionId": "ocd-division/country:us/state:il/place:chicago",
+   "officialIndices": [
+    10
+   ]
+  },
+  {
+   "name": "City Treasurer",
+   "divisionId": "ocd-division/country:us/state:il/place:chicago",
+   "officialIndices": [
+    11
+   ]
+  },
+  {
+   "name": "State Comptroller",
+   "divisionId": "ocd-division/country:us/state:il",
+   "officialIndices": [
+    12
+   ]
+  },
+  {
+   "name": "Secretary of State",
+   "divisionId": "ocd-division/country:us/state:il",
+   "officialIndices": [
+    13
+   ]
+  },
+  {
+   "name": "Attorney General",
+   "divisionId": "ocd-division/country:us/state:il",
+   "officialIndices": [
+    14
+   ]
+  },
+  {
+   "name": "State Treasurer",
+   "divisionId": "ocd-division/country:us/state:il",
+   "officialIndices": [
+    15
+   ]
+  },
+  {
+   "name": "County Commissioner, District 12",
+   "divisionId": "ocd-division/country:us/state:il/county:cook/council_district:12",
+   "officialIndices": [
+    16
+   ]
+  },
+  {
+   "name": "Assessor",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    17
+   ]
+  },
+  {
+   "name": "County Clerk",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    18
+   ]
+  },
+  {
+   "name": "Circuit Clerk",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    19
+   ]
+  },
+  {
+   "name": "Sheriff",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    20
+   ]
+  },
+  {
+   "name": "Recorder of Deeds",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    21
+   ]
+  },
+  {
+   "name": "Treasurer",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    22
+   ]
+  },
+  {
+   "name": "State's Attorney",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    23
+   ]
+  },
+  {
+   "name": "County Board President",
+   "divisionId": "ocd-division/country:us/state:il/county:cook",
+   "officialIndices": [
+    24
+   ]
+  },
+  {
+   "name": "Council, Ward 1",
+   "divisionId": "ocd-division/country:us/state:il/place:chicago/ward:1",
+   "officialIndices": [
+    25
+   ]
+  }
+ ],
+ "officials": [
+  {
+   "name": "Donald J. Trump",
+   "address": [
+    {
+     "line1": "The White House",
+     "line2": "1600 Pennsylvania Ave NW",
+     "line3": "",
+     "city": "Washington",
+     "state": "DC",
+     "zip": "20500"
+    }
+   ],
+   "party": "Republican Party",
+   "phones": [
+    "(202) 456-1111"
+   ],
+   "urls": [
+    "http://www.whitehouse.gov/"
+   ],
+   "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/PE%20Color.jpg",
+   "channels": [
+    {
+     "type": "GooglePlus",
+     "id": "+whitehouse"
     },
-    "divisions": {
-        "ocd-division/country:us": {
-            "name": "United States",
-            "officeIndices": [
-                0,
-                1
-            ]
-        },
-        "ocd-division/country:us/state:il": {
-            "name": "Illinois",
-            "officeIndices": [
-                2,
-                4,
-                5
-            ]
-        },
-        "ocd-division/country:us/state:il/cd:5": {
-            "name": "Illinois's 5th congressional district",
-            "officeIndices": [
-                3
-            ]
-        },
-        "ocd-division/country:us/state:il/sldl:4": {
-            "name": "Illinois State House district 4",
-            "officeIndices": [
-                7
-            ]
-        },
-        "ocd-division/country:us/state:il/sldu:2": {
-            "name": "Illinois State Senate district 2",
-            "officeIndices": [
-                6
-            ]
-        }
+    {
+     "type": "Facebook",
+     "id": "whitehouse"
     },
-    "offices": [
-        {
-            "name": "President of the United States",
-            "divisionId": "ocd-division/country:us",
-            "levels": [
-                "country"
-            ],
-            "roles": [
-                "headOfState",
-                "headOfGovernment"
-            ],
-            "officialIndices": [
-                0
-            ]
-        },
-        {
-            "name": "Vice-President of the United States",
-            "divisionId": "ocd-division/country:us",
-            "levels": [
-                "country"
-            ],
-            "roles": [
-                "deputyHeadOfGovernment"
-            ],
-            "officialIndices": [
-                1
-            ]
-        },
-        {
-            "name": "United States Senate",
-            "divisionId": "ocd-division/country:us/state:il",
-            "levels": [
-                "country"
-            ],
-            "roles": [
-                "legislatorUpperBody"
-            ],
-            "officialIndices": [
-                2,
-                3
-            ]
-        },
-        {
-            "name": "United States House of Representatives IL-05",
-            "divisionId": "ocd-division/country:us/state:il/cd:5",
-            "levels": [
-                "country"
-            ],
-            "roles": [
-                "legislatorLowerBody"
-            ],
-            "officialIndices": [
-                4
-            ]
-        },
-        {
-            "name": "Governor",
-            "divisionId": "ocd-division/country:us/state:il",
-            "levels": [
-                "administrativeArea1"
-            ],
-            "roles": [
-                "headOfGovernment"
-            ],
-            "officialIndices": [
-                5
-            ]
-        },
-        {
-            "name": "Lieutenant Governor",
-            "divisionId": "ocd-division/country:us/state:il",
-            "levels": [
-                "administrativeArea1"
-            ],
-            "roles": [
-                "deputyHeadOfGovernment"
-            ],
-            "officialIndices": [
-                6
-            ]
-        },
-        {
-            "name": "IL State Senate District 2",
-            "divisionId": "ocd-division/country:us/state:il/sldu:2",
-            "levels": [
-                "administrativeArea1"
-            ],
-            "roles": [
-                "legislatorUpperBody"
-            ],
-            "officialIndices": [
-                7
-            ]
-        },
-        {
-            "name": "IL State House District 4",
-            "divisionId": "ocd-division/country:us/state:il/sldl:4",
-            "levels": [
-                "administrativeArea1"
-            ],
-            "roles": [
-                "legislatorLowerBody"
-            ],
-            "officialIndices": [
-                8
-            ]
-        }
-    ],
-    "officials": [
-        {
-            "name": "Donald J. Trump",
-            "address": [
-                {
-                    "line1": "The White House",
-                    "line2": "1600 Pennsylvania Ave NW",
-                    "line3": "",
-                    "city": "Washington",
-                    "state": "DC",
-                    "zip": "20500"
-                }
-            ],
-            "party": "Republican Party",
-            "phones": [
-                "(202) 456-1111"
-            ],
-            "urls": [
-                "http://www.whitehouse.gov/"
-            ],
-            "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/PE%20Color.jpg",
-            "channels": [
-                {
-                    "type": "GooglePlus",
-                    "id": "+whitehouse"
-                },
-                {
-                    "type": "Facebook",
-                    "id": "whitehouse"
-                },
-                {
-                    "type": "Twitter",
-                    "id": "potus"
-                },
-                {
-                    "type": "YouTube",
-                    "id": "whitehouse"
-                }
-            ]
-        },
-        {
-            "name": "Mike Pence",
-            "address": [
-                {
-                    "line1": "The White House",
-                    "line2": "1600 Pennsylvania Avenue NW",
-                    "line3": "",
-                    "city": "Washington",
-                    "state": "DC",
-                    "zip": "20500"
-                }
-            ],
-            "party": "Republican Party",
-            "phones": [
-                "(202) 456-1111"
-            ],
-            "urls": [
-                "http://www.whitehouse.gov/"
-            ],
-            "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
-            "channels": [
-                {
-                    "type": "GooglePlus",
-                    "id": "+whitehouse"
-                },
-                {
-                    "type": "Facebook",
-                    "id": "whitehouse"
-                },
-                {
-                    "type": "Twitter",
-                    "id": "VP"
-                }
-            ]
-        },
-        {
-            "name": "Tammy Duckworth",
-            "address": [
-                {
-                    "line1": "United States Senate",
-                    "line2": "524 Hart Senate Office Building",
-                    "line3": "",
-                    "city": "Washington",
-                    "state": "DC",
-                    "zip": "20510"
-                },
-                {
-                    "line1": "230 South Dearborn Street",
-                    "line2": "Suite 3900",
-                    "line3": "",
-                    "city": "Chicago",
-                    "state": "IL",
-                    "zip": "60604"
-                }
-            ],
-            "party": "Democratic Party",
-            "phones": [
-                "(202) 224-2854"
-            ],
-            "urls": [
-                "https://www.duckworth.senate.gov"
-            ],
-            "photoUrl": "http://bioguide.congress.gov/bioguide/photo/D/D000622.jpg",
-            "channels": [
-                {
-                    "type": "Facebook",
-                    "id": "SenDuckworth"
-                },
-                {
-                    "type": "Twitter",
-                    "id": "SenDuckworth"
-                },
-                {
-                    "type": "YouTube",
-                    "id": "SenDuckworth"
-                }
-            ]
-        },
-        {
-            "name": "Richard J. Durbin",
-            "address": [
-                {
-                    "line1": "United States Senate",
-                    "line2": "711 Hart Senate Office Building",
-                    "line3": "",
-                    "city": "Washington",
-                    "state": "DC",
-                    "zip": "20510"
-                },
-                {
-                    "line1": "230 S Dearborn Street",
-                    "line2": "Suite 3892",
-                    "line3": "",
-                    "city": "Chicago",
-                    "state": "IL",
-                    "zip": "60604"
-                }
-            ],
-            "party": "Democratic Party",
-            "phones": [
-                "(202) 224-2152"
-            ],
-            "urls": [
-                "http://www.durbin.senate.gov/public/"
-            ],
-            "photoUrl": "http://bioguide.congress.gov/bioguide/photo/D/D000563.jpg",
-            "channels": [
-                {
-                    "type": "Facebook",
-                    "id": "SenatorDurbin"
-                },
-                {
-                    "type": "Twitter",
-                    "id": "SenatorDurbin"
-                },
-                {
-                    "type": "YouTube",
-                    "id": "SenatorDurbin"
-                }
-            ]
-        },
-        {
-            "name": "Mike Quigley",
-            "address": [
-                {
-                    "line1": "United States House of Representatives",
-                    "line2": "2458 Rayburn House Office Building",
-                    "line3": "",
-                    "city": "Washington",
-                    "state": "DC",
-                    "zip": "20515"
-                },
-                {
-                    "line1": "4345 N. Milwaukee Ave.",
-                    "line2": "",
-                    "line3": "",
-                    "city": "Chicago",
-                    "state": "IL",
-                    "zip": "60641"
-                }
-            ],
-            "party": "Democratic Party",
-            "phones": [
-                "(202) 225-4061"
-            ],
-            "urls": [
-                "http://quigley.house.gov/"
-            ],
-            "photoUrl": "http://bioguide.congress.gov/bioguide/photo/Q/Q000023.jpg",
-            "channels": [
-                {
-                    "type": "Facebook",
-                    "id": "repmikequigley"
-                },
-                {
-                    "type": "Twitter",
-                    "id": "RepMikeQuigley"
-                },
-                {
-                    "type": "YouTube",
-                    "id": "RepMikeQuigley"
-                }
-            ]
-        },
-        {
-            "name": "J.B. Pritzker",
-            "party": "Democratic Party",
-            "phones": [
-                "(217) 782-0244"
-            ],
-            "urls": [
-                "https://www2.illinois.gov/sites/gov/Pages/default.aspx"
-            ],
-            "emails": [
-                "GovernorsOffice@illinois.gov"
-            ]
-        },
-        {
-            "name": "Juliana Stratton",
-            "party": "Democratic Party",
-            "phones": [
-                "(217) 782-0244"
-            ],
-            "urls": [
-                "https://www2.illinois.gov/sites/ltg/Pages/default.aspx"
-            ],
-            "emails": [
-                "LtGovernorsOffice@illinois.gov"
-            ]
-        },
-        {
-            "name": "Omar Aquino",
-            "address": [
-                {
-                    "line1": "Capitol Building",
-                    "line2": "Room M120",
-                    "line3": "",
-                    "city": "Springfield",
-                    "state": "IL",
-                    "zip": "62706"
-                },
-                {
-                    "line1": "4353 W. Armitage Ave",
-                    "line2": "",
-                    "line3": "",
-                    "city": "Chicago",
-                    "state": "IL",
-                    "zip": "60639"
-                }
-            ],
-            "party": "Democratic Party",
-            "phones": [
-                "(773) 292-0202"
-            ],
-            "urls": [
-                "http://ilga.gov/senate/Senator.asp?GA=101&MemberID=2673"
-            ],
-            "photoUrl": "http://www.ilga.gov/images/members/%7B79A5CDE2-DD9F-423E-83F0-4643FDB13ABB%7D.jpg",
-            "emails": [
-                "Aquino@senatedem.illinois.gov"
-            ],
-            "channels": [
-                {
-                    "type": "Twitter",
-                    "id": "SenatorAquino"
-                },
-                {
-                    "type": "Twitter",
-                    "id": "OmarAquinoIL2"
-                }
-            ]
-        },
-        {
-            "name": "Delia C. Ramirez",
-            "party": "Democratic Party",
-            "phones": [
-                "(773) 799-8554"
-            ],
-            "urls": [
-                "http://ilga.gov/house/Rep.asp?GA=101&MemberID=2747"
-            ],
-            "emails": [
-                "info@repdeliaramirez.com"
-            ]
-        }
-    ]
+    {
+     "type": "Twitter",
+     "id": "potus"
+    },
+    {
+     "type": "YouTube",
+     "id": "whitehouse"
+    }
+   ]
+  },
+  {
+   "name": "Mike Pence",
+   "address": [
+    {
+     "line1": "The White House",
+     "line2": "1600 Pennsylvania Avenue NW",
+     "line3": "",
+     "city": "Washington",
+     "state": "DC",
+     "zip": "20500"
+    }
+   ],
+   "party": "Republican Party",
+   "phones": [
+    "(202) 456-1111"
+   ],
+   "urls": [
+    "http://www.whitehouse.gov/"
+   ],
+   "photoUrl": "https://www.whitehouse.gov/sites/whitehouse.gov/files/images/45/VPE%20Color.jpg",
+   "channels": [
+    {
+     "type": "GooglePlus",
+     "id": "+whitehouse"
+    },
+    {
+     "type": "Facebook",
+     "id": "whitehouse"
+    },
+    {
+     "type": "Twitter",
+     "id": "VP"
+    }
+   ]
+  },
+  {
+   "name": "Tammy Duckworth",
+   "address": [
+    {
+     "line1": "United States Senate",
+     "line2": "524 Hart Senate Office Building",
+     "line3": "",
+     "city": "Washington",
+     "state": "DC",
+     "zip": "20510"
+    },
+    {
+     "line1": "230 South Dearborn Street",
+     "line2": "Suite 3900",
+     "line3": "",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60604"
+    }
+   ],
+   "party": "Democratic Party",
+   "phones": [
+    "(202) 224-2854"
+   ],
+   "urls": [
+    "https://www.duckworth.senate.gov"
+   ],
+   "photoUrl": "http://bioguide.congress.gov/bioguide/photo/D/D000622.jpg",
+   "channels": [
+    {
+     "type": "Facebook",
+     "id": "SenDuckworth"
+    },
+    {
+     "type": "Twitter",
+     "id": "SenDuckworth"
+    },
+    {
+     "type": "YouTube",
+     "id": "SenDuckworth"
+    }
+   ]
+  },
+  {
+   "name": "Richard J. Durbin",
+   "address": [
+    {
+     "line1": "United States Senate",
+     "line2": "711 Hart Senate Office Building",
+     "line3": "",
+     "city": "Washington",
+     "state": "DC",
+     "zip": "20510"
+    },
+    {
+     "line1": "230 S Dearborn Street",
+     "line2": "Suite 3892",
+     "line3": "",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60604"
+    }
+   ],
+   "party": "Democratic Party",
+   "phones": [
+    "(202) 224-2152"
+   ],
+   "urls": [
+    "http://www.durbin.senate.gov/public/"
+   ],
+   "photoUrl": "http://bioguide.congress.gov/bioguide/photo/D/D000563.jpg",
+   "channels": [
+    {
+     "type": "Facebook",
+     "id": "SenatorDurbin"
+    },
+    {
+     "type": "Twitter",
+     "id": "SenatorDurbin"
+    },
+    {
+     "type": "YouTube",
+     "id": "SenatorDurbin"
+    }
+   ]
+  },
+  {
+   "name": "Mike Quigley",
+   "address": [
+    {
+     "line1": "United States House of Representatives",
+     "line2": "2458 Rayburn House Office Building",
+     "line3": "",
+     "city": "Washington",
+     "state": "DC",
+     "zip": "20515"
+    },
+    {
+     "line1": "4345 N. Milwaukee Ave.",
+     "line2": "",
+     "line3": "",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60641"
+    }
+   ],
+   "party": "Democratic Party",
+   "phones": [
+    "(202) 225-4061"
+   ],
+   "urls": [
+    "http://quigley.house.gov/"
+   ],
+   "photoUrl": "http://bioguide.congress.gov/bioguide/photo/Q/Q000023.jpg",
+   "channels": [
+    {
+     "type": "Facebook",
+     "id": "repmikequigley"
+    },
+    {
+     "type": "Twitter",
+     "id": "RepMikeQuigley"
+    },
+    {
+     "type": "YouTube",
+     "id": "RepMikeQuigley"
+    }
+   ]
+  },
+  {
+   "name": "J.B. Pritzker",
+   "party": "Democratic Party",
+   "phones": [
+    "(217) 782-0244"
+   ],
+   "urls": [
+    "https://www2.illinois.gov/sites/gov/Pages/default.aspx"
+   ],
+   "emails": [
+    "GovernorsOffice@illinois.gov"
+   ]
+  },
+  {
+   "name": "Juliana Stratton",
+   "party": "Democratic Party",
+   "phones": [
+    "(217) 782-0244"
+   ],
+   "urls": [
+    "https://www2.illinois.gov/sites/ltg/Pages/default.aspx"
+   ],
+   "emails": [
+    "LtGovernorsOffice@illinois.gov"
+   ]
+  },
+  {
+   "name": "Omar Aquino",
+   "address": [
+    {
+     "line1": "Capitol Building",
+     "line2": "Room M120",
+     "line3": "",
+     "city": "Springfield",
+     "state": "IL",
+     "zip": "62706"
+    },
+    {
+     "line1": "4353 W. Armitage Ave",
+     "line2": "",
+     "line3": "",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60639"
+    }
+   ],
+   "party": "Democratic Party",
+   "phones": [
+    "(773) 292-0202"
+   ],
+   "urls": [
+    "http://ilga.gov/senate/Senator.asp?GA=101&MemberID=2673"
+   ],
+   "photoUrl": "http://www.ilga.gov/images/members/%7B79A5CDE2-DD9F-423E-83F0-4643FDB13ABB%7D.jpg",
+   "emails": [
+    "Aquino@senatedem.illinois.gov"
+   ],
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "SenatorAquino"
+    },
+    {
+     "type": "Twitter",
+     "id": "OmarAquinoIL2"
+    }
+   ]
+  },
+  {
+   "name": "Delia C. Ramirez",
+   "party": "Democratic Party",
+   "phones": [
+    "(773) 799-8554"
+   ],
+   "urls": [
+    "http://ilga.gov/house/Rep.asp?GA=101&MemberID=2747"
+   ],
+   "emails": [
+    "info@repdeliaramirez.com"
+   ]
+  },
+  {
+   "name": "Anna M. Valencia",
+   "party": "Nonpartisan",
+   "phones": [
+    "(312) 742-5375"
+   ],
+   "urls": [
+    "http://www.chicityclerk.com/"
+   ],
+   "emails": [
+    "cityclerk@cityofchicago.org"
+   ],
+   "channels": [
+    {
+     "type": "Facebook",
+     "id": "chicityclerk"
+    }
+   ]
+  },
+  {
+   "name": "Rahm Emanuel",
+   "address": [
+    {
+     "line1": "121 N LaSalle Street",
+     "line2": "Chicago City Hall",
+     "line3": "4th Floor",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60602"
+    }
+   ],
+   "party": "Nonpartisan",
+   "phones": [
+    "(312) 744-5000"
+   ],
+   "urls": [
+    "https://www.chicago.gov/city/en/depts/mayor.html"
+   ],
+   "photoUrl": "http://www.cityofchicago.org/content/dam/city/depts/mayor/general/Rahm_200x200.jpg",
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "RahmEmanuel"
+    },
+    {
+     "type": "YouTube",
+     "id": "ChicagoMayorsOffice"
+    },
+    {
+     "type": "Twitter",
+     "id": "ChicagosMayor"
+    },
+    {
+     "type": "Facebook",
+     "id": "rahmemanuel"
+    },
+    {
+     "type": "GooglePlus",
+     "id": "+chicagosmayor"
+    }
+   ]
+  },
+  {
+   "name": "Kurt Summers",
+   "party": "Nonpartisan",
+   "phones": [
+    "(312) 744-3356"
+   ],
+   "urls": [
+    "https://www.chicagocitytreasurer.com/"
+   ],
+   "emails": [
+    "city.treasurer@cityofchicago.org"
+   ]
+  },
+  {
+   "name": "Susana Mendoza",
+   "party": "Democratic Party",
+   "phones": [
+    "(217) 782-6000"
+   ],
+   "urls": [
+    "https://illinoiscomptroller.gov/"
+   ],
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "ILComptroller"
+    }
+   ]
+  },
+  {
+   "name": "Jesse White",
+   "party": "Democratic Party",
+   "phones": [
+    "(800) 252-8980"
+   ],
+   "urls": [
+    "https://www.cyberdriveillinois.com/"
+   ],
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "ILSecOfState"
+    }
+   ]
+  },
+  {
+   "name": "Kwame Raoul",
+   "party": "Democratic Party",
+   "phones": [
+    "(217) 782-1090"
+   ],
+   "urls": [
+    "http://www.illinoisattorneygeneral.gov/"
+   ],
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "KwameRaoul"
+    }
+   ]
+  },
+  {
+   "name": "Michael W. Frerichs",
+   "party": "Democratic Party",
+   "phones": [
+    "(866) 458-7327"
+   ],
+   "urls": [
+    "https://illinoistreasurer.gov/"
+   ],
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "ILTreasurer"
+    }
+   ]
+  },
+  {
+   "name": "Bridget Degnen",
+   "party": "Unknown",
+   "phones": [
+    "(312) 603-6380"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/bridget-degnen"
+   ],
+   "emails": [
+    "bridget.degnen@cookcountyil.gov"
+   ]
+  },
+  {
+   "name": "Fritz Kaegi",
+   "party": "Unknown",
+   "phones": [
+    "(312) 443-7550"
+   ],
+   "urls": [
+    "http://www.cookcountyassessor.com/"
+   ]
+  },
+  {
+   "name": "Karen A. Yarbrough",
+   "party": "Unknown",
+   "phones": [
+    "(312) 603-5656"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/karen-yarbrough-0"
+   ]
+  },
+  {
+   "name": "Dorothy Anne Brown",
+   "party": "Democratic",
+   "phones": [
+    "(312) 603-5030"
+   ],
+   "urls": [
+    "http://www.cookcountyclerkofcourt.org/"
+   ],
+   "emails": [
+    "courtclerk@cookcountycourt.com"
+   ]
+  },
+  {
+   "name": "Thomas Dart",
+   "party": "Unknown",
+   "phones": [
+    "(312) 603-6444"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/thomas-dart"
+   ]
+  },
+  {
+   "name": "Edward M. Moody",
+   "party": "Unknown",
+   "phones": [
+    "(312) 603-5050"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/edward-m-moody-0"
+   ]
+  },
+  {
+   "name": "Maria Pappas",
+   "party": "Unknown",
+   "phones": [
+    "(312) 443-5100"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/maria-pappas"
+   ]
+  },
+  {
+   "name": "Kimberly M. Foxx",
+   "party": "Democratic",
+   "phones": [
+    "(312) 603-1880"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/anita-alvarez"
+   ],
+   "emails": [
+    "statesattorney@cookcountyil.gov"
+   ]
+  },
+  {
+   "name": "Toni Preckwinkle",
+   "address": [
+    {
+     "line1": "118 N. Clark St.",
+     "line2": "Room 537",
+     "line3": "",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60602"
+    }
+   ],
+   "party": "Unknown",
+   "phones": [
+    "(312) 603-6400"
+   ],
+   "urls": [
+    "https://www.cookcountyil.gov/person/toni-preckwinkle"
+   ],
+   "photoUrl": "https://www.cookcountyil.gov/sites/default/files/toni_preckwinkle_president.jpg",
+   "channels": [
+    {
+     "type": "Twitter",
+     "id": "ToniPreckwinkle"
+    }
+   ]
+  },
+  {
+   "name": "Joe Proco Moreno",
+   "address": [
+    {
+     "line1": "Chicago City Hall",
+     "line2": "121 N. LaSalle St.",
+     "line3": "Room 300, Office 5",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60602"
+    },
+    {
+     "line1": "2740 W. North Ave.",
+     "line2": "",
+     "line3": "",
+     "city": "Chicago",
+     "state": "IL",
+     "zip": "60647"
+    }
+   ],
+   "party": "Nonpartisan",
+   "phones": [
+    "(312) 744-3063"
+   ],
+   "urls": [
+    "https://www.chicago.gov/city/en/about/wards/01.html"
+   ],
+   "photoUrl": "http://www.cityofchicago.org/content/dam/city/about/wards/01/aldward01.jpg",
+   "emails": [
+    "ward01@cityofchicago.org"
+   ],
+   "channels": [
+    {
+     "type": "YouTube",
+     "id": "AldermanMoreno"
+    },
+    {
+     "type": "Facebook",
+     "id": "joe.moreno.33886305"
+    },
+    {
+     "type": "Facebook",
+     "id": "FirstWardChicago"
+    },
+    {
+     "type": "Twitter",
+     "id": "Alderman_Moreno"
+    }
+   ]
+  }
+ ]
 }
