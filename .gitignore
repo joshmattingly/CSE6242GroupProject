@@ -25,3 +25,9 @@ SiteBackend/static/lat_long_for_lookup\.csv
 SiteBackend/static/pollutants_by_latlong\.csv
 
 SiteBackend/static/testData\.csv
+
+SiteBackend/static/chicago_pollutants_by_latlong\.csv
+
+SiteBackend/static/chicago_pollutants_by_latlong\.zip
+
+SiteBackend/static/Zips_Retrieved\.csv
