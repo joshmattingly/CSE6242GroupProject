@@ -68,9 +68,19 @@
                         center: {lat: {{ lat }}, lng: {{ long }} },
                         zoom: 17
                     });
+
+                    heatmap = new google.maps.visualization.HeatmapLayer({
+                        data: [new google.maps.LatLng(41.9101579,-87.6865162, weight=100)],
+                    });
+
+                    heatmap.setMap(map)
+                  }
+
+                function getPoints(){
+                    return
                 }
             </script>
-            <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap"
+            <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&callback=initMap&libraries=visualization"
                     async defer></script>
         </div>
         <div class="col-4">
@@ -89,10 +99,11 @@
                         <div class="card-body scrollable">
                             <div class="display-3 score">
                             {{ location_score }}
+                                <div class="note">This score represents the average quality of air based on World Health Organization guidelines.</div>
                             </div>
                             <div class="card-body scrollable">
                                 <div id="summaryChart" ></div>
-
+                                <div class="note">{{ summaryNote }}</div>
                             </div>
                         </div>
                     </div>

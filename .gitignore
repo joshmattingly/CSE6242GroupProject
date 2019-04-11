@@ -19,3 +19,9 @@ SiteBackend/config\.py
 SiteBackend/config\.pyc
 
 SiteBackend/__pycache__/config\.cpython-37\.pyc
+
+SiteBackend/static/lat_long_for_lookup\.csv
+
+SiteBackend/static/pollutants_by_latlong\.csv
+
+SiteBackend/static/testData\.csv

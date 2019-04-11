@@ -8,8 +8,6 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='./css/style.css') }}">
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places"></script>
 </head>
 <body>
 <div class="container">
@@ -77,56 +75,68 @@
 </body>
 
 <script>
-    let width = 100;
-    let height = 350;
+    let width = "100%";
+    let height = 150;
 
     var svg = d3.select("#summaryChart").append("svg")
         .attr("width", "100%")
         .attr("height", height);
 
     promises = [
-        d3.csv("{{ url_for('static', filename='aqg.csv') }}")
+        d3.csv("{{ url_for('static', filename='aqg.csv') }}"),
+        d3.csv("{{ url_for('static', filename='testData.csv') }}")
     ];
 
     Promise.all(promises).then(function (data) {
 
         let limits = data[0];
+        let testData = data[1];
 
         limits.forEach(function (d) {
             d.mortality = +d.mortality;
             d.value = +d.value;
         });
 
-        let pm25Scale = d3.scaleLinear()
-            .domain([0, 20])
-            .range([0, width]);
+        testData.forEach(function(d){
+            d.value = +d.value;
+        });
 
-        let pm10Scale = d3.scaleLinear()
-            .domain([0, 40])
-            .range([0, width]);
-
-        let ozoneScale = d3.scaleLinear()
+        let chartScale = d3.scaleLinear()
             .domain([0, 200])
-            .range([0, width]);
+            .range([0, 90]);
 
-        let sulfurScale = d3.scaleLinear()
-            .domain([0, 40])
-            .range([0, width]);
+        let categoryScale = d3.scaleBand()
+            .domain(['PM 2.5', 'PM 10', 'Ozone', 'Sulfure Dioxide', 'Nitrogen Dioxide'])
+            .range([2.5, height])
 
-        let nitrogenScale = d3.scaleLinear()
-            .domain([0, 80])
-            .range([0, width]);
+        let yAxis = d3.axisLeft(categoryScale);
 
-        svg.selectAll("rect")
-            .data(limits.filter(d => d.AQG == 'PM 2.5'))
+        svg.append("g").selectAll("rect")
+            .data(testData)
             .enter()
             .append("rect")
-            .attr("x", d => pm25Scale(d.value))
-            .attr("y", 0)
-            .attr("height", 10)
-            .attr("width", 10)
-            .attr("fill", "steelblue");
+            .attr("x", 0)
+            .attr("y", d => categoryScale(d.AQG))
+            .attr("height", 20)
+            .attr("width", d => chartScale(d.value))
+            .attr("fill", "#B3DDF2")
+            .attr("transform", "translate(90, 0)");
 
+        svg.append("g").selectAll("rect")
+            .data(limits)
+            .enter()
+            .append("rect")
+            .attr("x", d => chartScale(d.value))
+            .attr("y", d => categoryScale(d.AQG)-5)
+            .attr("height", 30)
+            .attr("width", 2)
+            .attr("fill", "#FF0000")
+            .attr("transform", "translate(90, 0)");
+
+        svg.append("g")
+            .attr("transform", "translate(90, -6)")
+            .call(yAxis)
+            .select(".domain").remove();
     });
 </script>
 

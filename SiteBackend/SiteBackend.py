@@ -7,6 +7,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import utilities
+import notes
 
 test_summary = '''
 This portion and only this portion will have a very long text so much so that the vertical scroll bar may appear when 
@@ -96,7 +97,7 @@ def index():
     return render_template('index.html', api_key=config.api_key, location_score='55%', summary=test_summary,
                            form=form, address=address, senator1=senator1, senator2=senator2,
                            house_rep=house_rep, state_senator=state_senator, state_rep=state_rep,
-                           alderman=alderman, lat=lat, long=long)
+                           alderman=alderman, lat=lat, long=long, summaryNote=notes.summaryNote)
 
 
 @app.route('/about')
