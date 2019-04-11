@@ -8,7 +8,7 @@
 
 .scrollable{
   overflow-y: auto;
-  max-height: 550px;
+  max-height: 450px;
 }
 
 .card{

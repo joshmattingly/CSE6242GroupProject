@@ -11,6 +11,7 @@
                         <img src="{{ url_for('static', filename='./images/search_icon.png') }}" width="35"/>
                     </button>
                 </form>
+                <sub>(examples: 1060 W Addison St, Daley Plaza, South Lawndale)</sub>
             </div>
         </div>
 </div>
@@ -53,11 +54,6 @@
                                 {{ alderman[0] }}
                             </a>
                         </p>
-                        <p>County Commissioner:<br>
-                            <a href="{{ commissioner[1] }}" target="_blank">
-                                {{ commissioner[0] }}
-                            </a>
-                        </p>
                     </div>
                 </div>
             </div>
@@ -65,20 +61,11 @@
         <div class="col-6 map">
             <div id="map"></div>
             <script>
-                /*
-                var input = document.getElementById('fetchAddress');
-                var fetchAddress = new google.maps.places.Autocomplete(input, {types: ['(address)']});
-
-                google.maps.event.addListener(fetchAddress, 'place_changed', function(){
-                     var place = fetchAddress.getPlace();
-                })
-                */
-
                 let map;
 
                 function initMap() {
                     map = new google.maps.Map(document.getElementById('map'), {
-                        center: {lat: 41.910134, lng: -87.684338},
+                        center: {lat: {{ lat }}, lng: {{ long }} },
                         zoom: 17
                     });
                 }
@@ -100,7 +87,13 @@
 
                     <div id="scoreSummary" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
                         <div class="card-body scrollable">
-                            {{ summary }}
+                            <div class="display-3 score">
+                            {{ location_score }}
+                            </div>
+                            <div class="card-body scrollable">
+                                <div id="summaryChart" ></div>
+
+                            </div>
                         </div>
                     </div>
                 </div>

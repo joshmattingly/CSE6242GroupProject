@@ -78,7 +78,6 @@ def make_shell_context():
 def index():
     address = "1060 W Addison St, Chicago, IL 60613"
     form = AddressForm()
-    geo_record = []
 
     senator1 = []
     senator2 = []
@@ -87,17 +86,17 @@ def index():
     state_rep = []
     commissioner = []
     alderman = []
-    senator1, senator2, house_rep, state_senator, state_rep, commissioner, alderman = utilities.get_reps(address)
+    address, lat, long, senator1, senator2, house_rep, state_senator, state_rep, alderman = utilities.get_reps(address)
     if form.validate_on_submit():
         address = form.address.data
         form.address.data = ''
-        # geo_record = utilities.geocode(address)
-        senator1, senator2, house_rep, state_senator, state_rep, commissioner, alderman = utilities.get_reps(address)
+
+        address, lat, long, senator1, senator2, house_rep, state_senator, state_rep, alderman = utilities.get_reps(address)
 
     return render_template('index.html', api_key=config.api_key, location_score='55%', summary=test_summary,
                            form=form, address=address, senator1=senator1, senator2=senator2,
                            house_rep=house_rep, state_senator=state_senator, state_rep=state_rep,
-                           commissioner=commissioner, alderman=alderman)
+                           alderman=alderman, lat=lat, long=long)
 
 
 @app.route('/about')
