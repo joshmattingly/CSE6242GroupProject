@@ -44,7 +44,7 @@
                                 {{ state_senator[0]}}
                             </a>
                         </p>
-                        <p>State Representative: <br>
+                        <p>State Rep: <br>
                             <a href="{{ state_rep[1] }}" target="_blank">
                                 {{ state_rep[0] }}
                             </a>
@@ -61,19 +61,23 @@
         <div class="col-6 map">
             <div id="map"></div>
             <script>
-                let map;
 
                 function initMap() {
-                    map = new google.maps.Map(document.getElementById('map'), {
+                    let map = new google.maps.Map(document.getElementById('map'), {
                         center: {lat: {{ lat }}, lng: {{ long }} },
-                        zoom: 17
+                        zoom: 15
                     });
 
-                    heatmap = new google.maps.visualization.HeatmapLayer({
+                    let heatmap = new google.maps.visualization.HeatmapLayer({
                         data: [new google.maps.LatLng(41.9101579,-87.6865162, weight=100)],
                     });
 
-                    heatmap.setMap(map)
+                    var marker = new google.maps.Marker({
+                        position: {lat: {{ lat }}, lng: {{ long }} }
+                    });
+
+                    heatmap.setMap(map);
+                    marker.setMap(map);
                   }
 
                 function getPoints(){
