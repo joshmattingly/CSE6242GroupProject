@@ -28,6 +28,6 @@ for index, row in dataset.iterrows():
         print(row['ID'], row['lat'], row['long'], city, zipcode)
     except KeyError:
         pass
+    except IndexError:
+        dataset.to_csv('./static/geo_coded_pollutants.csv')
     time.sleep(0.5)
-
-dataset.to_csv('./static/geo_coded_pollutants.csv')
