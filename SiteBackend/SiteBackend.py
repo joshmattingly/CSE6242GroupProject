@@ -1,5 +1,6 @@
 import os
 import config
+import pandas as pd
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap
@@ -31,27 +32,6 @@ db = SQLAlchemy(app)
 bootstrap = Bootstrap(app)
 
 
-class Role(db.Model):
-    __tablename__ = 'roles'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(64), unique=True)
-    users = db.relationship('User', backref='role')
-
-    def __repr__(self):
-        return '<Role %r>' % self.name
-
-
-class User(db.Model):
-    __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), unique=True, index=True)
-    email = db.Column(db.String(64), unique=True, index=True)
-    role_id = db.Column(db.Integer, db.ForeignKey('roles.id'))
-
-    def __repr__(self):
-        return '<User %r>' % self.username
-
-
 class Data(db.Model):
     __tablename__ = 'dataset'
     id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -65,6 +45,29 @@ class Data(db.Model):
     avg = db.Column(db.Float)
 
 
+class ZipMetric(db.Model):
+    __tablename__ = 'zipmetrics'
+    zips = db.Column(db.Text, primary_key=True)
+    pm_25 = db.Column(db.Float)
+    pm_10 = db.Column(db.Float)
+    ozone = db.Column(db.Float)
+    nd = db.Column(db.Float)
+    sd = db.Column(db.Float)
+    asthma = db.Column(db.Float)
+    asthma018 = db.Column(db.Float)
+    asthma04 = db.Column(db.Float)
+    asthma65 = db.Column(db.Float)
+    chronlowresp = db.Column(db.Float)
+    hearthdisease = db.Column(db.Float)
+    hypertension = db.Column(db.Float)
+    lungcancer = db.Column(db.Float)
+    copd = db.Column(db.Float)
+    liv_score = db.Column(db.Float)
+
+    def __repr__(self):
+        return '<ZipMetric %r>' % self.zipcode
+
+
 class AddressForm(FlaskForm):
     address = StringField('Enter an Address:', validators=[DataRequired()])
     submit = SubmitField()
@@ -72,7 +75,7 @@ class AddressForm(FlaskForm):
 
 @app.shell_context_processor
 def make_shell_context():
-    return dict(db=db, Role=Role, User=User, Data=Data)
+    return dict(db=db, Data=Data, zipmetrics=ZipMetric)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -87,17 +90,37 @@ def index():
     state_rep = []
     commissioner = []
     alderman = []
-    address, lat, long, senator1, senator2, house_rep, state_senator, state_rep, alderman = utilities.get_reps(address)
+    address, lat, long, zipcode, senator1, senator2, house_rep, state_senator, state_rep, alderman = utilities.get_reps(address)
+
     if form.validate_on_submit():
         address = form.address.data
         form.address.data = ''
 
-        address, lat, long, senator1, senator2, house_rep, state_senator, state_rep, alderman = utilities.get_reps(address)
+    address, lat, long, zipcode, senator1, senator2, house_rep, state_senator, state_rep, alderman = utilities.get_reps(address)
 
-    return render_template('index.html', api_key=config.api_key, location_score='55%', summary=test_summary,
+    metric_query = ZipMetric.query.filter_by(zips=zipcode)
+    zip_data = pd.read_sql(metric_query.statement, db.session.bind)
+
+    zip_data.columns = ['zipcode', 'PM 2.5', 'PM 10', 'Ozone', 'Nitrogen Dioxide', 'Sulfure Dioxide', 'Asthma',
+                        'Asthma ED visits (0-18 years)', 'Asthma ED visits (0-4 years)', 'Asthma ED Visits (65+ years)',
+                        'Chronic lower respiratory disease deaths', 'Diagnosed heart disease', 'Hypertension',
+                        'Lung cancer incidence', 'Screened or diagnosed with COPD', 'liv_score']
+
+    zip_pollution = zip_data[['zipcode', 'PM 2.5', 'PM 10', 'Ozone', 'Nitrogen Dioxide', 'Sulfure Dioxide']]
+    zip_health = zip_data[['zipcode', 'Asthma', 'Asthma ED visits (0-18 years)', 'Asthma ED visits (0-4 years)',
+                           'Asthma ED Visits (65+ years)', 'Chronic lower respiratory disease deaths',
+                           'Diagnosed heart disease', 'Hypertension', 'Lung cancer incidence',
+                           'Screened or diagnosed with COPD']]
+    zip_data_melt = pd.melt(zip_pollution, id_vars=['zipcode'], var_name=['Metric'], value_name='value')
+    zip_health_melt = pd.melt(zip_health, id_vars=['zipcode'], var_name=['Metric'], value_name='value')
+
+    return render_template('index.html', api_key=config.api_key,
+                           location_score=str(round(zip_data['liv_score'][0],1)) + "%", summary=test_summary,
                            form=form, address=address, senator1=senator1, senator2=senator2,
                            house_rep=house_rep, state_senator=state_senator, state_rep=state_rep,
-                           alderman=alderman, lat=lat, long=long, summaryNote=notes.summaryNote)
+                           alderman=alderman, lat=lat, long=long, summaryNote=notes.summaryNote,
+                           data_package=[zip_data_melt.to_json(orient='records'),
+                                         zip_health_melt.to_json(orient='records')])
 
 
 @app.route('/about')

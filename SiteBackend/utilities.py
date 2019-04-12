@@ -16,17 +16,19 @@ def geocode(address):
         if component['types'][0] == "locality":
             if component['long_name'] != 'Chicago':
                 return geocode('1060 W Addision St')
+        if component['types'][0] == 'postal_code':
+            zipcode = component['short_name']
 
     formatted_address = data['results'][0]['formatted_address']
     lat = data['results'][0]['geometry']['location']['lat']
     long = data['results'][0]['geometry']['location']['lng']
 
-    return formatted_address, lat, long
+    return formatted_address, lat, long, zipcode
 
 
 def get_reps(address):
 
-    address, lat, long = geocode(address)
+    address, lat, long, zipcode = geocode(address)
     url = "https://www.googleapis.com/civicinfo/v2/representatives?address=" + address + "&includeOffices=true&key=" + config.api_key
 
     senate = r'United States Senate'
@@ -62,7 +64,7 @@ def get_reps(address):
     except KeyError:
         return get_reps('1060 W Addison St, Chicago, IL 60613')
 
-    return address, lat, long, senator1, senator2, house_rep, state_senator, state_rep, alderman
+    return address, lat, long, zipcode, senator1, senator2, house_rep, state_senator, state_rep, alderman
 
 
 if __name__ == '__main__':

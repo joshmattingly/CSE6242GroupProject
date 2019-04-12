@@ -31,3 +31,5 @@ SiteBackend/static/chicago_pollutants_by_latlong\.csv
 SiteBackend/static/chicago_pollutants_by_latlong\.zip
 
 SiteBackend/static/Zips_Retrieved\.csv
+
+SiteBackend/static/joined_zip\.csv

@@ -82,22 +82,25 @@
         .attr("width", "100%")
         .attr("height", height);
 
+    data_package = {{ data_package | safe }}
+
     promises = [
         d3.csv("{{ url_for('static', filename='aqg.csv') }}"),
+        JSON.parse(data_package[0]),
         d3.csv("{{ url_for('static', filename='testData.csv') }}")
     ];
 
     Promise.all(promises).then(function (data) {
 
         let limits = data[0];
-        let testData = data[1];
+        let zip_pollution = data[1];
+        let zip_health = data[2];
+
+        console.log(zip_pollution);
+        console.log(zip_health);
 
         limits.forEach(function (d) {
             d.mortality = +d.mortality;
-            d.value = +d.value;
-        });
-
-        testData.forEach(function(d){
             d.value = +d.value;
         });
 
@@ -112,11 +115,11 @@
         let yAxis = d3.axisLeft(categoryScale);
 
         svg.append("g").selectAll("rect")
-            .data(testData)
+            .data(zip_pollution)
             .enter()
             .append("rect")
             .attr("x", 0)
-            .attr("y", d => categoryScale(d.AQG))
+            .attr("y", d => categoryScale(d.Metric))
             .attr("height", 20)
             .attr("width", d => chartScale(d.value))
             .attr("fill", "#B3DDF2")
