@@ -116,7 +116,7 @@ def index():
 
     return render_template('index.html', api_key=config.api_key,
                            location_score=str(round(zip_data['liv_score'][0],1)) + "%", summary=test_summary,
-                           form=form, address=address, senator1=senator1, senator2=senator2,
+                           form=form, address=address, senator1=senator1, senator2=senator2, zipcode = zipcode,
                            house_rep=house_rep, state_senator=state_senator, state_rep=state_rep,
                            alderman=alderman, lat=lat, long=long, summaryNote=notes.summaryNote,
                            data_package=[zip_data_melt.to_json(orient='records'),

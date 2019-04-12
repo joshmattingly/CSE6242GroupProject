@@ -77,17 +77,23 @@
 <script>
     let width = "100%";
     let height = 150;
+    let health_height = height * 3;
 
     var svg = d3.select("#summaryChart").append("svg")
         .attr("width", "100%")
         .attr("height", height);
+
+
+    var svg2 = d3.select("#healthChart").append("svg")
+        .attr("width", "100%")
+        .attr("height", health_height);
 
     data_package = {{ data_package | safe }}
 
     promises = [
         d3.csv("{{ url_for('static', filename='aqg.csv') }}"),
         JSON.parse(data_package[0]),
-        d3.csv("{{ url_for('static', filename='testData.csv') }}")
+        JSON.parse(data_package[1])
     ];
 
     Promise.all(promises).then(function (data) {
@@ -112,8 +118,20 @@
             .domain(['PM 2.5', 'PM 10', 'Ozone', 'Sulfure Dioxide', 'Nitrogen Dioxide'])
             .range([2.5, height])
 
+        let healthBand = d3.scaleBand()
+            .domain(['Asthma', 'Asthma ED visits (0-18 years)', 'Asthma ED visits (0-4 years)',
+                           'Asthma ED Visits (65+ years)', 'Chronic lower respiratory disease deaths',
+                           'Diagnosed heart disease', 'Hypertension', 'Lung cancer incidence',
+                           'Screened or diagnosed with COPD'])
+            .range([15, health_height])
+
+        let healthRange = d3.scaleLinear()
+            .domain([0, d3.max(zip_health, d => d.value)])
+            .range([0, 90])
+
         let yAxis = d3.axisLeft(categoryScale);
 
+        // visualization for pollution related metrics
         svg.append("g").selectAll("rect")
             .data(zip_pollution)
             .enter()
@@ -140,6 +158,38 @@
             .attr("transform", "translate(90, -6)")
             .call(yAxis)
             .select(".domain").remove();
+
+        // visualization for health related metrics
+        svg2.append("g").selectAll("text")
+            .data(zip_health)
+            .enter()
+            .append("text")
+            .text(d => d.Metric)
+            .style("font-size", "12px")
+            .attr("x", 5)
+            .attr("y", d => healthBand(d.Metric));
+
+        svg2.append("g").selectAll("rect")
+            .data(zip_health)
+            .enter()
+            .append("rect")
+            .attr("fill", "steelblue")
+            .attr("height", 10)
+            .attr("width", d => healthRange(d.value))
+            .attr("x", 0)
+            .attr("y", d => healthBand(d.Metric))
+            .attr("transform", "translate(0, 5)");
+
+        svg2.append("g").selectAll("text")
+            .data(zip_health)
+            .enter()
+            .append("text")
+            .text(d => d.value)
+            .style("font-size", "10px")
+            .style("font-weight", "heavy")
+            .attr("x", d => healthRange(d.value))
+            .attr("y", d => healthBand(d.Metric))
+            .attr("transform", "translate(5, 15)");
     });
 </script>
 
