@@ -1,3 +1,13 @@
+###
+# Build and Test the Predictive Models
+#
+# For each pollutant, run a gridsearch across several different predictive models and 
+# hyperparameters to find the optimal predictive model for that particular pollutant
+# considering root mean squared error.
+#
+# This will also create a set of charts showing the predicted data.
+###
+
 import pandas as pd
 import numpy as np
 import time
@@ -22,9 +32,8 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 
 from utils import max_lon, min_lon, max_lat, min_lat, build_X_grid, resolution_lon, resolution_lat
 
-# download Josh's cleaned data set: https://s3.us-east-2.amazonaws.com/chipy6242/dataset_clean.csv
-# df = pd.read_csv('https://s3.us-east-2.amazonaws.com/chipy6242/dataset_clean.csv', parse_dates=['datetime'])
-df = pd.read_csv('dataset_clean.csv', parse_dates=['datetime'])
+# Download Josh's cleaned data set: https://s3.us-east-2.amazonaws.com/chipy6242/dataset_clean.csv
+df = pd.read_csv('https://s3.us-east-2.amazonaws.com/chipy6242/dataset_clean.csv', parse_dates=['datetime'])
 
 # Input Parameters we are looking at (with filtering on the dataframe)
 parameters = [

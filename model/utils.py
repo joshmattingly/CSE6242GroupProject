@@ -1,13 +1,10 @@
+###
+# Shared variables and functions used between other scripts
+###
+
 import numpy as np
 import pandas as pd
 
-# max_lon = -87.78208166700001
-# min_lon = -87.52757
-# max_lat = 41.983275
-# min_lat = 41.7052
-# TR 42.022479, -87.665264
-# TL 41.990843, -87.939466
-# BR 41.644855, -87.525046
 max_lon = -87.934711
 min_lon = -87.526155
 max_lat = 42.022810

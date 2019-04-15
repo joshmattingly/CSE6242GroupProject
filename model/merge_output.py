@@ -1,3 +1,9 @@
+###
+# Merge the results of the pollutant CSVs into a single CSV that is
+# easier to work with.
+# Depends on: outputs/*.csv
+###
+
 import pandas as pd
 import numpy as np
 import time
@@ -18,7 +24,7 @@ for parameter in parameters:
         dfJoined = dfRaw
     else:
         dfJoined[parameter] = dfRaw[parameter]
-dfJoined.to_csv('output.csv')
+dfJoined.to_csv('data/output.csv')
 
-print(' > output.csv')
+print(' > data/output.csv')
 print('DONE.')

@@ -1,6 +1,13 @@
 Building the Model
 ==================
 
+DESCRIPTION
+-----------
+This package creates a geo-spatial interpolation model of the air pollution data within
+Chicago. It analyzes several models and hyperparameters for each pollutant and then 
+calculates a livability score from the results. It also predicts over a grid and converts
+to a smoother contour plot and outputs geojson for loading on top of a map.
+
 Chosen Parameters to analyze:
 * PM 2.5
 * PM 10
@@ -17,22 +24,16 @@ Chosen algorithms to analyze:
 
 Goal: Find the best model for each parameter and make predictions for each hour of the day.
 
-Running
--------
+INSTALLATION
+------------
+* Requires Python 3.5+
+* Requeires the following python packages: pandas, numpy, matplotlib, sklearn, geojsoncontour
 
-Run `python build_model.py` which will generate results in the directories: `./charts/`, `./models/`, and `./outputs/`.
+EXECUTION
+---------
+The following steps will generate the models, the predictive results, and geojson necessary for 
+plotting the predictions on a map. This will take several hours to run from start to finish.
 
-Then to merge all the output files into a single CSV run: `python merge_output.py`.
-
-Generating GeoJSON
-------------------
-
-GeoJSON of a filled contour plot.
-
-Run `python do_geojson.py` which will generate a geojson file for every csv in the `./outputs/` directory.
-
-Steps
------
 1. `python build_model.py` - Build the model from the basic inputs
 2. `python merge_output.py` - Merge the model results into a single file
 3. `python output_zips.py` - Attach zip codes to the results

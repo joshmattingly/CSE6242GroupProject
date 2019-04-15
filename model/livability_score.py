@@ -1,4 +1,5 @@
 ###
+# Helper method for calculating the Livability Score
 # Author: Erin McKeon
 ###
 

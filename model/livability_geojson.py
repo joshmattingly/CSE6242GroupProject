@@ -1,3 +1,7 @@
+###
+# Generate GeoJson contour plots for the Livability score
+# Depends on: data/livability_scores.csv
+###
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
