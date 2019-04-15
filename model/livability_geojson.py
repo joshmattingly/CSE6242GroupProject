@@ -1,11 +1,12 @@
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import os
 import geojsoncontour
 
 from utils import weekends, hods, resolution_lon, resolution_lat, grid_lon, grid_lat
 
+n_contours = 50
 parameter = 'Livability'
 output = pd.read_csv('./data/livability_scores.csv')
 for weekend in weekends:
@@ -15,7 +16,6 @@ for weekend in weekends:
         lons = np.reshape(data['long'].values, (resolution_lon, resolution_lat))
         lats = np.reshape(data['lat'].values, (resolution_lon, resolution_lat))
 
-        n_contours = 10
         z_min = np.nanmin(data[parameter].values)
         z_max = np.nanmax(data[parameter].values)
         z_eql = np.equal(round(z_min, 5), round(z_max, 5))
@@ -42,7 +42,9 @@ for weekend in weekends:
 
         plt.close(figure)
 
-        name = 'geojsons/{}-weekend-{}-hod-{}.json'.format(parameter, weekend, hod)
+        directory = 'geojsons/contours-{}'.format(n_contours)
+        os.makedirs(directory, exist_ok=True)
+        name = 'geojsons/contours-{}/{}-weekend-{}-hod-{}.json'.format(n_contours, parameter, weekend, hod)
         file = open(name, 'w')
         file.write(geojson)
         file.close()
